@@ -2,4 +2,7 @@
     <string name="app_name">Horoscope</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="horoscope_fragment">horoscope fragment</string>
+    <string name="luck_fragment">luck fragment</string>
+    <string name="palmistry_fragment">palmistry fragment</string>
 </resources>
