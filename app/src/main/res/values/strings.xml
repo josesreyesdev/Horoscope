@@ -5,4 +5,9 @@
     <string name="horoscope_fragment">horoscope fragment</string>
     <string name="luck_fragment">luck fragment</string>
     <string name="palmistry_fragment">palmistry fragment</string>
+
+    <!-- Bottom Bar -->
+    <string name="horoscope">Horoscope</string>
+    <string name="luck">Luck</string>
+    <string name="palmistry">Palmistry</string>
 </resources>
