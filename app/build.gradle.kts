@@ -53,7 +53,7 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 
-
+    implementation(libs.androidx.activity)
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
