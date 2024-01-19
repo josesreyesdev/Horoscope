@@ -14,7 +14,6 @@ import androidx.navigation.navArgs
 import com.jsrdev.horoscope.R
 import com.jsrdev.horoscope.databinding.ActivityHoroscopeDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -48,7 +47,7 @@ class HoroscopeDetailActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 horoscopeDetailViewModel.state.collect { state ->
-                    when(state) {
+                    when (state) {
                         is HoroscopeDetailState.Error -> errorState()
                         HoroscopeDetailState.Loading -> loadingState(true)
                         is HoroscopeDetailState.Success -> successState()
