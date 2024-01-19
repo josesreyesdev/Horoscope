@@ -16,7 +16,7 @@
         android:label="fragment_horoscope"
         tools:layout="@layout/fragment_horoscope" >
         <action
-            android:id="@+id/action_horoscopeFragment_to_horoscopeDetailActivity"
+            android:id="@+id/action_horoscopeFragment_to_horoscopeDetailActivity2"
             app:destination="@id/horoscopeDetailActivity" />
     </fragment>
     <fragment
