@@ -29,7 +29,10 @@ class HoroscopeAdapter(
     override fun onBindViewHolder(holder: HoroscopeViewHolder, position: Int) {
         val currentHoroscope = horoscopeList[position]
         holder.itemView.setOnClickListener {
-            startRotationAnimation(view = holder.itemView, newLambda = {onHoroscopeClicked(currentHoroscope)})
+            startRotationAnimation(
+                view = holder.itemView,
+                newLambda = {onHoroscopeClicked(currentHoroscope)}
+            )
         }
         holder.bind(currentHoroscope)
     }

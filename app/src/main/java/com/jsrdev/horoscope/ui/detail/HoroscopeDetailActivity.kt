@@ -36,6 +36,8 @@ class HoroscopeDetailActivity : AppCompatActivity() {
             insets
         }
 
+        horoscopeDetailViewModel.getHoroscopeDetail(args.currentHoroscope.name)
+
         initUi()
     }
 
@@ -50,21 +52,24 @@ class HoroscopeDetailActivity : AppCompatActivity() {
                     when (state) {
                         is HoroscopeDetailState.Error -> errorState()
                         HoroscopeDetailState.Loading -> loadingState(true)
-                        is HoroscopeDetailState.Success -> successState()
+                        is HoroscopeDetailState.Success -> successState(state)
                     }
                 }
             }
         }
     }
 
-    private fun loadingState(state: Boolean) {
-        binding.progressBar.isVisible = state
+    private fun loadingState(showProgressBar: Boolean) {
+        binding.progressBar.isVisible = showProgressBar
     }
 
     private fun errorState() {
+        loadingState(false)
     }
 
-    private fun successState() {
+    private fun successState(state: HoroscopeDetailState.Success) {
         loadingState(false)
+        binding.title.text = state.sign
+        binding.textBody.text = state.data
     }
 }
