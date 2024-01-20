@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
-import kotlin.math.sign
 
 @HiltViewModel
 class HoroscopeDetailViewModel @Inject constructor(
@@ -32,9 +31,10 @@ class HoroscopeDetailViewModel @Inject constructor(
             _state.value = HoroscopeDetailState.Loading
 
             // hilo secundario
-            val result = withContext(Dispatchers.IO) {getPredictionUseCase(currentHoroscope.name) }
+            val result = withContext(Dispatchers.IO) { getPredictionUseCase(currentHoroscope.name) }
             if (result != null) {
-                _state.value = HoroscopeDetailState.Success(result.horoscope, result.sign, horoscope)
+                _state.value =
+                    HoroscopeDetailState.Success(result.horoscope, result.sign, horoscope)
             } else {
                 _state.value = HoroscopeDetailState.Error("Ha ocurrido un error")
             }
