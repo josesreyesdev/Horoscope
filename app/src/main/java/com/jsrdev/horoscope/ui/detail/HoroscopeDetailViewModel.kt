@@ -2,6 +2,7 @@ package com.jsrdev.horoscope.ui.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jsrdev.horoscope.domain.model.HoroscopeModel
 import com.jsrdev.horoscope.domain.usecase.GetPredictionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -10,6 +11,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import kotlin.math.sign
 
 @HiltViewModel
 class HoroscopeDetailViewModel @Inject constructor(
@@ -19,15 +21,20 @@ class HoroscopeDetailViewModel @Inject constructor(
     private var _state = MutableStateFlow<HoroscopeDetailState>(HoroscopeDetailState.Loading)
     val state: StateFlow<HoroscopeDetailState> = _state
 
-    fun getHoroscopeDetail(sign : String) {
+    lateinit var horoscope: HoroscopeModel
+
+    fun getHoroscopeDetail(currentHoroscope: HoroscopeModel) {
+
+        horoscope = currentHoroscope
+
         viewModelScope.launch {
             // Hilo principal
             _state.value = HoroscopeDetailState.Loading
 
             // hilo secundario
-            val result = withContext(Dispatchers.IO) {getPredictionUseCase(sign) }
+            val result = withContext(Dispatchers.IO) {getPredictionUseCase(currentHoroscope.name) }
             if (result != null) {
-                _state.value = HoroscopeDetailState.Success(result.horoscope, result.sign)
+                _state.value = HoroscopeDetailState.Success(result.horoscope, result.sign, horoscope)
             } else {
                 _state.value = HoroscopeDetailState.Error("Ha ocurrido un error")
             }
