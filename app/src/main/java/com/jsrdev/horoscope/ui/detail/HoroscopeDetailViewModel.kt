@@ -1,5 +1,6 @@
 package com.jsrdev.horoscope.ui.detail
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jsrdev.horoscope.domain.model.HoroscopeModel
@@ -35,8 +36,9 @@ class HoroscopeDetailViewModel @Inject constructor(
             if (result != null) {
                 _state.value =
                     HoroscopeDetailState.Success(result.horoscope, result.sign, horoscope)
+                Log.i("DetailVM", _state.value.toString())
             } else {
-                _state.value = HoroscopeDetailState.Error("Ha ocurrido un error")
+                _state.value = HoroscopeDetailState.Error("Ha ocurrido un error, intentelo mas tarde")
             }
         }
     }

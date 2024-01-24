@@ -1,5 +1,6 @@
 package com.jsrdev.horoscope.data.network
 
+import com.jsrdev.horoscope.BuildConfig.BASE_URL
 import com.jsrdev.horoscope.data.RepositoryImpl
 import com.jsrdev.horoscope.data.core.interceptors.AuthInterceptor
 import com.jsrdev.horoscope.domain.Repository
@@ -22,7 +23,7 @@ object NetworkModule {
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit
             .Builder()
-            .baseUrl("BASE_URL")
+            .baseUrl(BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -41,7 +42,7 @@ object NetworkModule {
     }
 
     @Provides
-    fun provideApiService( retrofit: Retrofit): HoroscopeApiService {
+    fun provideHoroscopeApiService(retrofit: Retrofit): HoroscopeApiService {
         return retrofit.create(HoroscopeApiService::class.java)
     }
 
