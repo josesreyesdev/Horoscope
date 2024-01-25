@@ -54,7 +54,7 @@ class HoroscopeFragment : Fragment() {
     private fun initList() {
 
         horoscopeAdapter = HoroscopeAdapter(onHoroscopeClicked = {
-            val currentHoroscope = when(it) {
+            val currentHoroscope = when (it) {
                 Aquarius -> HoroscopeModel.Aquarius
                 Aries -> HoroscopeModel.Aries
                 Cancer -> HoroscopeModel.Cancer
@@ -68,7 +68,10 @@ class HoroscopeFragment : Fragment() {
                 Taurus -> HoroscopeModel.Taurus
                 Virgo -> HoroscopeModel.Virgo
             }
-            val action = HoroscopeFragmentDirections.actionHoroscopeFragmentToHoroscopeDetailActivity2()
+            val action =
+                HoroscopeFragmentDirections.actionHoroscopeFragmentToHoroscopeDetailActivity2(
+                    currentHoroscope
+                )
             findNavController().navigate(action)
         })
 
