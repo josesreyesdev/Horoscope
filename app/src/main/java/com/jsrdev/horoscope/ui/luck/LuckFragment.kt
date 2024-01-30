@@ -12,7 +12,6 @@ import android.view.animation.DecelerateInterpolator
 import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.jsrdev.horoscope.R
 import com.jsrdev.horoscope.databinding.FragmentLuckBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,8 +22,6 @@ class LuckFragment : Fragment() {
 
     private var _binding: FragmentLuckBinding? = null
     private val binding by lazy { requireNotNull(_binding) }
-
-    private val luckViewModel: LuckViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +53,8 @@ class LuckFragment : Fragment() {
         val random = Random()
         val degrees = random.nextInt(1440) + 360
 
-        val animator =  ObjectAnimator.ofFloat(binding.roulette, View.ROTATION, 0f, degrees.toFloat())
+        val animator =
+            ObjectAnimator.ofFloat(binding.roulette, View.ROTATION, 0f, degrees.toFloat())
         animator.duration = 2000
         animator.interpolator = DecelerateInterpolator()
         animator.doOnEnd { slideCard() }
@@ -66,16 +64,16 @@ class LuckFragment : Fragment() {
     private fun slideCard() {
         val slideUpAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_up)
 
-        slideUpAnimation.setAnimationListener(object: Animation.AnimationListener{
+        slideUpAnimation.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(animation: Animation?) {
                 binding.reverse.isVisible = true
             }
 
-            override fun onAnimationEnd(animation: Animation?) { growCard() /* agrandar img */ }
-
-            override fun onAnimationRepeat(animation: Animation?) {
-                TODO("Not yet implemented")
+            override fun onAnimationEnd(animation: Animation?) {
+                growCard() /* agrandar img */
             }
+
+            override fun onAnimationRepeat(animation: Animation?) {}
         })
 
         binding.reverse.startAnimation(slideUpAnimation)
@@ -83,8 +81,8 @@ class LuckFragment : Fragment() {
 
     private fun growCard() {
         val growAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.grow)
-        growAnimation.setAnimationListener(object: Animation.AnimationListener{
-            override fun onAnimationStart(animation: Animation?) { }
+        growAnimation.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationStart(animation: Animation?) {}
 
             override fun onAnimationEnd(animation: Animation?) {
                 binding.reverse.isVisible = false
@@ -104,7 +102,7 @@ class LuckFragment : Fragment() {
         val appearAnimation = AlphaAnimation(0.0f, 1.0f)
         appearAnimation.duration = 1000
 
-        disappearAnimation.setAnimationListener( object: Animation.AnimationListener{
+        disappearAnimation.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(animation: Animation?) {}
 
             override fun onAnimationEnd(animation: Animation?) {
