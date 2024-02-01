@@ -1,6 +1,7 @@
 package com.jsrdev.horoscope.ui.luck
 
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,14 +15,19 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.jsrdev.horoscope.R
 import com.jsrdev.horoscope.databinding.FragmentLuckBinding
+import com.jsrdev.horoscope.ui.providers.RandomCardProvider
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Random
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LuckFragment : Fragment() {
 
     private var _binding: FragmentLuckBinding? = null
     private val binding by lazy { requireNotNull(_binding) }
+
+    @Inject
+    lateinit var randomCardProvider: RandomCardProvider
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,8 +48,32 @@ class LuckFragment : Fragment() {
     }
 
     private fun initUI() {
+        preparePrediction()
         initListeners()
     }
+
+    private fun preparePrediction() {
+        val currentLuck = randomCardProvider.getLucky()
+        currentLuck?.let { luck ->
+            val currentPrediction = getString(luck.text)
+            binding.textLucky.text = currentPrediction
+            binding.imageLuckyCard.setImageResource(luck.image)
+
+            binding.textViewShare.setOnClickListener{ sharedResult(currentPrediction) }
+        }
+    }
+
+    private fun sharedResult(prediction: String) {
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, prediction)
+            type = "text/plain"
+        }
+
+        val sharedIntent = Intent.createChooser(sendIntent, null)
+        startActivity(sharedIntent)
+    }
+
 
     private fun initListeners() {
         binding.roulette.setOnClickListener { spinRoulette() }
