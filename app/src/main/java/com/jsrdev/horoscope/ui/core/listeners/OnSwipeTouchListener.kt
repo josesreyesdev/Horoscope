@@ -1,5 +1,6 @@
 package com.jsrdev.horoscope.ui.core.listeners
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.GestureDetector
 import android.view.MotionEvent
@@ -18,6 +19,7 @@ open class OnSwipeTouchListener(context: Context) : View.OnTouchListener {
         gestureDetector = GestureDetector(context, GestureListener())
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouch(v: View, event: MotionEvent): Boolean {
         return gestureDetector.onTouchEvent(event)
     }
