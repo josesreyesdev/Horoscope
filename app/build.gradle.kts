@@ -83,7 +83,13 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
+
+    //UnitTest
     testImplementation(libs.junit)
+    testImplementation (libs.kotlintest.runner.junit5)
+    testImplementation (libs.mockk)
+
+    //IntrumentationTest
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }
