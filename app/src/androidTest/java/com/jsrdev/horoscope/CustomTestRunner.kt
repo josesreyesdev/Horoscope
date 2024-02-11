@@ -1,4 +1,4 @@
-package com.jsrdev.horoscope.ui
+package com.jsrdev.horoscope
 
 import android.app.Application
 import android.content.Context
