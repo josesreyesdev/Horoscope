@@ -5,6 +5,9 @@
       <entry key="app">
         <State />
       </entry>
+      <entry key="when_horoscope_is_selected_then_open_detail()">
+        <State />
+      </entry>
     </value>
   </component>
 </project>
