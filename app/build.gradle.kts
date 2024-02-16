@@ -19,7 +19,10 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        // Creado automaticamente para pruebas en android, pero no funciona con dagger, entonces agregar:
+        //testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        testInstrumentationRunner = "com.jsrdev.horoscope.CustomTestRunner"
     }
 
     buildTypes {
@@ -83,7 +86,18 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
+
+    //UnitTest
     testImplementation(libs.junit)
+    testImplementation (libs.kotlintest.runner.junit5)
+    testImplementation (libs.mockk)
+
+    //InstrumentationTest
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.androidx.espresso.contrib)
+    androidTestImplementation (libs.androidx.espresso.intents)
+    androidTestImplementation (libs.hilt.android.testing)
+    androidTestImplementation (libs.androidx.fragment.testing)
+    kaptAndroidTest(libs.hilt.android.compiler)
 }
